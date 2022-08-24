@@ -2,7 +2,7 @@ import { DMMF } from '@prisma/generator-helper'
 import type { CodeBlockWriter } from 'ts-morph'
 import { Config } from './config'
 
-export { camelCase } from "camel-case";
+export { camelCase } from 'camel-case'
 
 export const writeArray = (writer: CodeBlockWriter, array: string[], newLine = true) =>
 	array.forEach((line) => writer.write(line).conditionalNewLine(newLine))
