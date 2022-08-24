@@ -6,6 +6,7 @@ import { SemicolonPreference } from 'typescript'
 import { configSchema, PrismaOptions } from './config'
 import { populateModelFile, generateBarrelFile } from './generator'
 import { Project } from 'ts-morph'
+import { camelCase } from './util'
 
 generatorHandler({
 	onManifest() {
@@ -55,7 +56,7 @@ generatorHandler({
 
 		models.forEach((model) => {
 			const sourceFile = project.createSourceFile(
-				`${outputPath}/${model.name.toLowerCase()}.ts`,
+				`${outputPath}/${camelCase(model.name)}.ts`,
 				{},
 				{ overwrite: true }
 			)

@@ -7,6 +7,7 @@ import { Project } from 'ts-morph'
 import { SemicolonPreference } from 'typescript'
 import { configSchema, PrismaOptions } from '../../config'
 import { populateModelFile, generateBarrelFile } from '../../generator'
+import { camelCase } from '../../util'
 
 jest.setTimeout(10000)
 
@@ -68,7 +69,7 @@ const ftForDir = (dir: string) => async () => {
 	await Promise.all(
 		dmmf.datamodel.models.map(async (model) => {
 			const sourceFile = project.createSourceFile(
-				`${actualDir}/${model.name.toLowerCase()}.ts`,
+				`${actualDir}/${camelCase(model.name)}.ts`,
 				{},
 				{ overwrite: true }
 			)
@@ -83,11 +84,11 @@ const ftForDir = (dir: string) => async () => {
 
 			await sourceFile.save()
 			const actualContents = await readFile(
-				`${actualDir}/${model.name.toLowerCase()}.ts`,
+				`${actualDir}/${camelCase(model.name)}.ts`,
 				'utf-8'
 			)
 
-			const expectedFile = path.resolve(expectedDir, `${model.name.toLowerCase()}.ts`)
+			const expectedFile = path.resolve(expectedDir, `${camelCase(model.name)}.ts`)
 			const expectedContents = await readFile(
 				path.resolve(expectedDir, expectedFile),
 				'utf-8'

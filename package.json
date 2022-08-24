@@ -53,6 +53,7 @@
 	},
 	"dependencies": {
 		"@prisma/generator-helper": "~3.8.1",
+		"camel-case": "^4.1.2",
 		"parenthesis": "^3.1.8",
 		"ts-morph": "^13.0.2"
 	},
